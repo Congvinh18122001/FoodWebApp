@@ -1,42 +1,152 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
+<html class=" js rgba boxshadow csstransitions">
+@Html.Partial("Head")
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="wrap">
+
+        @Html.Partial("TopMenu")
+        <div class="header">
+            <div class="logo">
+                <h1><a href="index.html">Food <span>Plaza</span></a></h1>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <div class="icons">
+                <ul>
+                    <li><a href="#"><img src="~/Content/User/images/fb.gif" alt="" title="facebook"></a></li>
+                    <li><a href="#"><img src="~/Content/User/images/twt.gif" alt="" title="twitter"></a></li>
+                    <li><a href="#"><img src="~/Content/User/images/gplus.gif" alt="" title="gplus"></a></li>
+                    <li><a href="#"><img src="~/Content/User/images/rss.gif" alt="" title="rss"></a></li>
                 </ul>
+            </div>
+            <div class="clear"></div>
+            <section class="slider">
+                <div class="flexslider">
+                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                    </div>
+                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                        <ul class="slides" style="width: 1600%; transition: all 0s ease 0s; transform: translate3d(-1207px, 0px, 0px);">
+                            <li style="width: 1207px; float: left; display: block;" class="clone">
+                                <img src="~/Content/User/images/3.jpg">
+                            </li>
+                            <li class="clone flex-active-slide" style="width: 1207px; float: left; display: block;">
+                                <img src="~/Content/User/images/1.jpg">
+                            </li>
+                            <li style="width: 1207px; float: left; display: block;" class="">
+                                <img src="~/Content/User/images/2.jpg">
+                            </li>
+                            <li class="" style="width: 1207px; float: left; display: block;">
+                                <img src="~/Content/User/images/3.jpg">
+                            </li>
+                            <li class="" style="width: 1207px; float: left; display: block;">
+                                <img src="~/Content/User/images/1.jpg">
+                            </li>
+                            <li style="width: 1207px; float: left; display: block;" class="">
+                                <img src="~/Content/User/images/2.jpg">
+                            </li>
+                            <li style="width: 1207px; float: left; display: block;" class="clone">
+                                <img src="~/Content/User/images/3.jpg">
+                            </li>
+                            <li class="clone" style="width: 1207px; float: left; display: block;">
+                                <img src="~/Content/User/images/1.jpg">
+                            </li>
+                        </ul>
+                    </div><ol class="flex-control-nav flex-control-paging"><li><a class="flex-active">1</a></li><li><a class="">2</a></li><li><a class="">3</a></li><li><a class="">4</a></li><li><a class="">5</a></li><li><a class="">6</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                </div>
+            </section>
+            <div class="clear"></div>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+        <div class="main">
+            <h3><a href="index.html">Special&nbsp;<span>Packages</span></a></h3>
+            <div class="section group">
+                <div class="col images_1_of_3">
+                    <img src="~/Content/User/images/pic1.jpg" alt="">
+                    <h2>Lorem Ipsum is simply dummy text </h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <div class="btn2"></div>
+                </div>
+                <div class="col images_1_of_3">
+                    <img src="~/Content/User/images/pic2.jpg" alt="">
+                    <h2>Lorem Ipsum is simply dummy text </h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <div class="btn2"></div>
+                </div>
+                <div class="col images_1_of_3">
+                    <img src="~/Content/User/images/pic3.jpg" alt="">
+                    <h2>Lorem Ipsum is simply dummy text </h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <div class="btn2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="ftr-top">
+            <div class="section group">
+                <div class="col span_1_of_4">
+                    <h2>Services List</h2>
+                    <ul class="nav1">
+                        <li><a href="#">Always free from repetition</a></li>
+                        <li><a href="#">Morbi blandit turpis ewuhre</a></li>
+                        <li><a href="#">Integer id ante nec elit mo</a></li>
+                        <li><a href="#">Maecenas accumsan lorem sed</a></li>
+                    </ul>
+                </div>
+                <div class="col span_1_of_4">
+                    <h2>Useful Sites</h2>
+                    <ul class="nav1">
+                        <li><a href="#">The standard chunk of Lorem Ipsum</a></li>
+                        <li><a href="#">Integer id ante nec esdlit sed Home</a></li>
+                        <li><a href="#">Maecenas accumsan lorem sed Home</a></li>
+                        <li><a href="#">The standard chunk of Lorem Ipsum</a></li>
+                    </ul>
+                </div>
+                <div class="col span_1_of_4">
+                    <h2>About Us</h2>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+                </div>
+                <div class="col span_1_of_4">
+                    <h2>Book A Room</h2>
+                    <div class="form">
+                        <form>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><span>Name:</span></td>
+                                        <td><input type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Number:</span></td>
+                                        <td>
+                                            <select>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Stay time:</span></td>
+                                        <td>
+                                            <select><option>01</option><option>02</option><option>03</option></select>
+                                            <select><option>Jan</option><option>Feb</option><option>Mar</option></select>
+                                            <select><option>1989</option><option>1990</option><option>1991</option></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="submit" value="Submit"><input type="reset"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <p class="w3-link">© 2013 Food Plaza. All Rights Reserved | Design By <a href="http://w3layouts.com/" target="_blank"> W3Layouts</a></p>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

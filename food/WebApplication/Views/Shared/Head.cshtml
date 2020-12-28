@@ -1,0 +1,23 @@
+﻿
+<head>
+    <title>Food-Plaza Website Template | Home :: W3layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="~/Content/User/css/style.css" media="all" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Tulpen+One" rel="stylesheet" type="text/css">
+    <script src="~/Content/User/js/modernizr.js"></script>
+    <!-- jQuery -->
+    <script src="~/Content/User/js/jquery.min.js"></script>
+    <!-- FlexSlider -->
+    <script defer="" src="~/Content/User/js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+</head>

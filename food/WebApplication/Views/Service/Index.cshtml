@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Food.lib.Objects.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main">
+    <h3><a href="#">&nbsp;<span>Service</span></a></h3>
+    <div class="section group">
+        @foreach (var item in Model)
+        {
+        <div class="col images_1_of_3">
+            <img src="~/Content/User/images/@item.Image" alt="@item.ProductName" />
+            <h2>@item.ProductName</h2>
+            <h2> $@item.UnitsPrice</h2>
+            <p>@item.Description</p>
+
+            <a href="@Url.Action("Supplier","Service",new { name = item.ProductName })"><div class="btn2"></div></a>
+
+        </div>
+        }
+
+    </div>
+</div>

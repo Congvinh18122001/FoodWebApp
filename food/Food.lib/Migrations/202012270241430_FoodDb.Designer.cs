@@ -13,7 +13,7 @@ namespace Food.lib.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202012211542555_FoodDb"; }
+            get { return "202012270241430_FoodDb"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,0 +1,11 @@
+﻿@using WebApplication.Models;
+@model List<CartItemModel>
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <h1>@item.Product.Id - @item.Product.ProductName - @item.Product.UnitsPrice-@item.Quarity-@item.TotalPrice</h1>
+}

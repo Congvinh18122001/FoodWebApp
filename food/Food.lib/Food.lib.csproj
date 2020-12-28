@@ -52,11 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FoodContext.cs" />
-    <Compile Include="Migrations\202012211542555_FoodDb.cs" />
-    <Compile Include="Migrations\202012211542555_FoodDb.designer.cs">
-      <DependentUpon>202012211542555_FoodDb.cs</DependentUpon>
+    <Compile Include="Migrations\202012270241430_FoodDb.cs" />
+    <Compile Include="Migrations\202012270241430_FoodDb.designer.cs">
+      <DependentUpon>202012270241430_FoodDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CartResponsibility.cs" />
+    <Compile Include="Models\ICartResponsibility.cs" />
+    <Compile Include="Models\IServiceResponsibility.cs" />
+    <Compile Include="Models\ServiceResponsibility.cs" />
     <Compile Include="Objects\Category.cs" />
     <Compile Include="Objects\Customer.cs" />
     <Compile Include="Objects\Member.cs" />
@@ -70,13 +74,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012211542555_FoodDb.resx">
-      <DependentUpon>202012211542555_FoodDb.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012270241430_FoodDb.resx">
+      <DependentUpon>202012270241430_FoodDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

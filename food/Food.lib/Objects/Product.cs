@@ -12,6 +12,7 @@ namespace Food.lib.Objects
         public int Id { get; set; }
         public string ProductName  { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
         public decimal UnitsPrice { get; set; }
         public int Inventory { get; set; }
         public Nullable<int> HadSold { get; set; }

@@ -9,5 +9,6 @@ D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.csproj.CoreCompileInputs.c
 D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.csproj.CopyComplete
 D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.dll
 D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.pdb
+D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.csprojAssemblyReference.cache
 D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.Migrations.FoodDb.resources
 D:\RECODE\FoodWebApp\food\Food.lib\obj\Debug\Food.lib.csproj.GenerateResource.cache

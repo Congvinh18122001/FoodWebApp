@@ -1,0 +1,74 @@
+﻿@using Food.lib.Objects;
+@model Product
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var products = ViewBag.productsOfSupplier as IEnumerable<Product>;
+ }
+<style>
+    .detail img {
+        width: 39%;
+        display: block;
+        float: left;
+        border: 10px solid gray;
+        margin-right:2%;
+        margin-top:-1.5%;
+    }
+    .detail h2 {
+        color: #C94848;
+        margin-top: 0.4em;
+        margin-bottom: 0.2em;
+        font-size: 1.2em;
+        font-weight: normal;
+        letter-spacing: -1px;
+    }
+    .detail{
+        padding-bottom:15%;
+        padding-left:1%;
+    }
+    .detail .Des{
+        margin-top:2%;
+    }
+</style>
+<div class="main">
+    <div class="detail">
+        <img src="~/Content/User/images/@Model.Image" class="main" />
+        <h3><a href="#">&nbsp;<span>@Model.ProductName</span></a></h3>
+
+        <div class="Des">
+            <h2 ">Made by : @Model.Supplier.SupplierName - @Model.Supplier.Address</h2>
+            <h2>Supplier --> @Model.Supplier.Description</h2>
+            <h2> Phone : @Model.Supplier.PhoneNumber</h2>
+            <h2>Description : @Model.Description</h2>
+            <h2> Price : $@Model.UnitsPrice</h2>
+        </div>
+        <a href="@Url.Action("AddToCart","Cart",new { ProductId = Model.Id , urlString = Request.Url.ToString()   })"><div class="btn2"></div></a>
+
+    </div>
+    <div class="main">
+        <h3><a href="#">&nbsp;<span>Other Products by @Model.Supplier.SupplierName</span></a></h3>
+        @foreach (var GroupItem in products.GroupBy(p => p.Category))
+        {
+            <h3><a href="#">&nbsp;<span>@GroupItem.Key.CategoryName</span></a></h3>
+            <div class="section group">
+                @foreach (var item in GroupItem)
+                {
+                    <div class="col images_1_of_3">
+                        <img src="~/Content/User/images/@item.Image" alt="@item.ProductName" />
+                        <h2>@item.ProductName</h2>
+                        <h2> $@item.UnitsPrice</h2>
+                        <p>@item.Description</p>
+
+                        <a href="@Url.Action("Detail","Service",new { id = item.Id })"><div class="btn2"></div></a>
+
+                    </div>
+                }
+
+            </div>
+        }
+    </div>
+</div>

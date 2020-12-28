@@ -84,3 +84,7 @@ D:\RECODE\FoodWebApp\food\WebApplication\bin\Food.lib.pdb
 D:\RECODE\FoodWebApp\food\WebApplication\bin\Food.lib.dll.config
 D:\RECODE\FoodWebApp\food\WebApplication\bin\EntityFramework.xml
 D:\RECODE\FoodWebApp\food\WebApplication\bin\EntityFramework.SqlServer.xml
+D:\RECODE\FoodWebApp\food\WebApplication\bin\PagedList.dll
+D:\RECODE\FoodWebApp\food\WebApplication\bin\PagedList.Mvc.dll
+D:\RECODE\FoodWebApp\food\WebApplication\bin\PagedList.xml
+D:\RECODE\FoodWebApp\food\WebApplication\bin\PagedList.Mvc.xml

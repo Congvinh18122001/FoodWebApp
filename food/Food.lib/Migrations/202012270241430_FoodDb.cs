@@ -23,6 +23,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         ProductName = c.String(),
                         Description = c.String(),
+                        Image = c.String(),
                         UnitsPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Inventory = c.Int(nullable: false),
                         HadSold = c.Int(),
@@ -135,13 +136,16 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(),
                         OrderDate = c.DateTime(nullable: false),
                         Shipped = c.Boolean(),
                         ShippedDate = c.DateTime(),
                         HadSold = c.Boolean(),
                         Cancelled = c.Boolean(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Customers", t => t.CustomerId)
+                .Index(t => t.CustomerId);
             
         }
         
@@ -149,12 +153,14 @@
         {
             DropForeignKey("dbo.OrderDetails", "ProductId", "dbo.Products");
             DropForeignKey("dbo.OrderDetails", "OrderId", "dbo.Orders");
+            DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Customers", "MemberId", "dbo.Members");
             DropForeignKey("dbo.Members", "TypeMemberId", "dbo.TypeMembers");
             DropForeignKey("dbo.MemberTypes_Role", "TypeMemberId", "dbo.TypeMembers");
             DropForeignKey("dbo.MemberTypes_Role", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.Products", "SupplierId", "dbo.Suppliers");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
+            DropIndex("dbo.Orders", new[] { "CustomerId" });
             DropIndex("dbo.OrderDetails", new[] { "OrderId" });
             DropIndex("dbo.OrderDetails", new[] { "ProductId" });
             DropIndex("dbo.MemberTypes_Role", new[] { "TypeMemberId" });
