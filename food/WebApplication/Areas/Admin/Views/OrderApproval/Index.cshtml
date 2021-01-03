@@ -1,0 +1,71 @@
+﻿@using Food.lib.Objects;
+@model IEnumerable<Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Quản lý đơn đặt hàng</h2>
+<hr />
+
+@*<a class="btn btn-link" href="@Url.Action("DonHangChưaThanhToans")">Chưa thanh toán & Đã giao</a>*@
+<a class="btn btn-link" href="@Url.Action("HasSold")">Chưa Giao & Đã thanh toán</a>
+<a class="btn btn-link" href="@Url.Action("Done")">Đã hoàn thành</a>
+<a class="btn btn-link" href="@Url.Action("Index")">Chờ duyệt</a>
+<hr />
+<h3>@ViewBag.Title</h3>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Đơn hàng</th>
+            <th>Mã khách hàng</th>
+            <th>Họ tên</th>
+            <th>Số điện thoại</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.CustomerId
+                </td>
+                <td>
+                    @item.Customer.Name
+                </td>
+                <td>
+                    @item.Customer.PhoneNumber
+                </td>
+                <td>
+                    <a href="@Url.Action("OrderApproval",new { id=item.Id})" class="btn btn-link">Duyệt đơn hàng</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@*@if (ViewBag.isLink == "a")
+    {
+        @Html.PagedListPager(Model, page => Url.Action("DonHangHoanThanh", new { page = page }))
+    }
+    @if (ViewBag.isLink == "b")
+    {
+        @Html.PagedListPager(Model, page => Url.Action("DonHangChưaThanhToans", new { page = page }))
+    }
+    @if (ViewBag.isLink == "c")
+    {
+        @Html.PagedListPager(Model, page => Url.Action("DonHangChuaGiao", new { page = page }))
+    }
+    @if (ViewBag.isLink == "d")
+    {
+        @Html.PagedListPager(Model, page => Url.Action("ChoDuyet", new { page = page }))
+    }*@
+
+
+
+

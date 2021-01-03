@@ -1,0 +1,136 @@
+﻿@using Food.lib.Objects;
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    List<Product> Products = ViewBag.Products as List<Product>;
+    List<Supplier> Suppliers = ViewBag.Suppliers as List<Supplier>;
+}
+
+
+
+<style>
+    .trAppend {
+        display: none;
+    }
+</style>
+<h2>Quản lý nhập sản phẩm</h2>
+<hr>
+
+@using (Html.BeginForm("SaveProduct", "Product", FormMethod.Post, new { @class = "formAddProduct" }))
+{
+    <hr>
+    <input name="NgayNhap" value="@DateTime.Now" type="hidden">
+    <table class="table tbnAddProduct">
+        <tbody>
+            <tr class="trAppend">
+                <td>
+                    <select name="" class="ddlSanPham form-control">
+                        @foreach (var item in Products)
+                        {
+                            <option value="@item.Id">@item.ProductName---@item.Supplier.SupplierName (@item.SupplierId)</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input name="" value="0" class="tbDonGia form-control">
+                </td>
+                <td>
+                    <input name="" value="0" class="tbSoLuong form-control">
+                </td>
+                <td><span style="width:34px;height:34px;border-radius:10px;" id="btnRemove" class="btn btn-danger">-</span></td>
+            </tr>
+
+            <tr class="trFirstChild" data-id="-1">
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th></th>
+            </tr>
+
+        </tbody>
+    </table>
+    <span style="width:34px;height:34px;border-radius:10px;" id="btnAdd" class="btn btn-success">+</span>
+    <input class="btn btn-primary btnNhap" type="button" value="Nhập">
+}
+
+
+<hr>
+<script>
+
+    $("#btnAdd").click(function () {
+        var id = $(".tbnAddProduct").find("tr:last-child").attr("data-id");
+        i = parseInt(id) + 1;
+        var tdNoiDung = $(".trAppend").html();
+        var trNoiDung = "<tr class=\"trAppended\" data-id=\"" + i + "\">" + tdNoiDung + "</tr>";
+        $(".tbnAddProduct").append(trNoiDung);
+        AddNameForInput();
+    });
+
+    $("table").delegate("#btnRemove", "click", function () {
+
+        $(this).closest(".trAppended").remove();
+        UpdateNameForInput();
+    });
+    function AddNameForInput() {
+        $(".trAppended").each(function () {
+            var i = $(this).attr("data-id");
+            var nameMaSP = "[" + i + "].Id";
+            var nameDonGia = "[" + i + "].UnitsPrice";
+            var nameSoluong = "[" + i + "].Inventory";
+            $(this).find(".ddlSanPham").prop("name", nameMaSP);
+            $(this).find(".tbDonGia").prop("name", nameDonGia);
+            $(this).find(".tbSoLuong").prop("name", nameSoluong);
+
+        });
+    }
+    function UpdateNameForInput() {
+        var idLast = $(".tbnAddProduct").find(".trFirstChild").attr("data-id");
+        i = parseInt(idLast) + 1;
+        $(".trAppended").each(function () {
+            ;
+            $(this).attr("data-id", i);
+            var nameMaSP = "[" + i + "].Id";
+            var nameDonGia = "[" + i + "].UnitsPrice";
+            var nameSoluong = "[" + i + "].Inventory";
+            $(this).find(".ddlSanPham").prop("name", nameMaSP);
+            $(this).find(".tbDonGia").prop("name", nameDonGia);
+            $(this).find(".tbSoLuong").prop("name", nameSoluong);
+            i++;
+        });
+    }
+    $(".btnNhap").click(function () {
+
+
+        if (CheckSoLuong() && CheckDonGia()) {
+            $(".formAddProduct").submit();
+        }
+    });
+
+    function CheckDonGia() {
+        var isCheckForm = true;
+        $(".tbDonGia").each(function () {
+            var val = $(this).val();
+            if (isNaN(val) == true || parseInt(val) < 0) {
+                alert("Đơn giá Không hợ lệ ! ");
+                isCheckForm = false;
+            }
+        });
+        return isCheckForm;
+    }
+    function CheckSoLuong() {
+        var isCheckForm = true;
+        $(".tbSoLuong").each(function () {
+            var val = $(this).val();
+            if (isNaN(val) == true || parseInt(val) < 0) {
+                alert("Số lượng Không hợ lệ ! ");
+                isCheckForm = false;
+            }
+        });
+        return isCheckForm;
+    }
+</script>
+
+
+

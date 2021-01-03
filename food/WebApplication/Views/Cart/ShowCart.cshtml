@@ -4,8 +4,55 @@
     ViewBag.Title = "ShowCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    #popup-order {
+        display: none;
+    }
+</style>
 @foreach (var item in Model)
 {
+    <img src="~/Content/User/images/@item.Product.Image" />
     <h1>@item.Product.Id - @item.Product.ProductName - @item.Product.UnitsPrice-@item.Quarity-@item.TotalPrice</h1>
 }
+<button id="btn-order">Order</button>
+<div id="popup-order">
+    <div class="wrapper">
+        <div class="form-bg-blur">
+            <div class="form-61">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="form-head">Đăng nhập</h4>
+
+                @using (Ajax.BeginForm("SaveOrder", "Cart", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "masage" }))
+                {
+                    <label class="lb">Name</label>
+                    @Html.TextBox("Name")<br />
+                    <label class="lb">Address </label>
+                    @Html.TextBox("Address")<br />
+                    <label class="lb">PhoneNumber</label>
+                    @Html.TextBox("PhoneNumber")<br />
+                    <label class="lb">PostalCode</label>
+                    @Html.TextBox("PostalCode")<br />
+                    <span style="color:red;float:right;" id="err"></span>
+                    <input style="margin-top:20px;margin-bottom:20px;" type="submit" value="Order" />
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="copyright text-center">
+        <div class="wrapper">
+            <p style="color:aliceblue" class="copy-footer-29">© 2020 Desk Login form. All rights reserved | Designed by <a href="https://w3layouts.com">W3layouts</a></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#btn-order").click(function () {
+        $("#popup-order").css("display", "block");
+    });
+
+    $(".close").click(function () {
+        $("#popup-order").css("display", "none");
+    });
+</script>

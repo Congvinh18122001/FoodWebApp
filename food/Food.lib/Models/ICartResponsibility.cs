@@ -11,6 +11,8 @@ namespace Food.lib.Models
     {
         List<Product> GetProducts();
         List<Category> GetCategories();
-
+        Customer UpdateCustomer(Customer customer);
+        Order AddOrder(Customer customer);
+        void AddOderDetail(List<OrderDetail> orderDetails);
     }
 }

@@ -16,6 +16,8 @@ namespace WebApplication.Controllers
         private FoodContext db = new FoodContext();
 
         // GET: Products
+
+
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);

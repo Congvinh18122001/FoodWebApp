@@ -23,22 +23,22 @@ namespace WebApplication.Controllers
             }
             return itemCarts;
         }
-        public ActionResult AddToCart(int? ProductId,string urlString)
+        public ActionResult AddToCart(int? ProductId, string urlString)
         {
 
             if (ProductId.HasValue)
             {
-                Product FindProduct = responsibility.GetProducts().SingleOrDefault(p=>p.Id==ProductId.Value);
-                if (FindProduct==null)
+                Product FindProduct = responsibility.GetProducts().SingleOrDefault(p => p.Id == ProductId.Value);
+                if (FindProduct == null)
                 {
                     Response.StatusCode = 404;
                     return null;
                 }
                 List<CartItemModel> itemCarts = GetCart();
-                CartItemModel CheckCart = itemCarts.SingleOrDefault(p=>p.Product.Id==ProductId);
-                if (CheckCart !=null)
+                CartItemModel CheckCart = itemCarts.SingleOrDefault(p => p.Product.Id == ProductId);
+                if (CheckCart != null)
                 {
-                    if (FindProduct.Inventory<=CheckCart.Quarity)
+                    if (FindProduct.Inventory <= CheckCart.Quarity)
                     {
                         return RedirectToAction("Notification", "Home", new { notify = "Không đủ hàng" });
                     }
@@ -55,38 +55,70 @@ namespace WebApplication.Controllers
         }
         public int SumQuarity()
         {
-            List<CartItemModel> itemCarts = Session["Cart"] as List<CartItemModel>;
-            if (itemCarts == null)
+            if (Session["Cart"] != null)
             {
-                return 0;
+                List<CartItemModel> itemCarts = Session["Cart"] as List<CartItemModel>;
+                if (itemCarts == null)
+                {
+                    return 0;
+                }
+                return itemCarts.Sum(p => p.Quarity);
             }
-            return itemCarts.Sum(p => p.Quarity);
+            return 0;
 
         }
         public decimal SumPrice()
         {
-            List<CartItemModel> itemCarts = Session["Cart"] as List<CartItemModel>;
-            if (itemCarts == null)
+            if (Session["Cart"] != null)
             {
-                return 0;
+                List<CartItemModel> itemCarts = Session["Cart"] as List<CartItemModel>;
+                if (itemCarts == null)
+                {
+                    return 0;
+                }
+                return itemCarts.Sum(p => (decimal)p.TotalPrice);
             }
-            return itemCarts.Sum(p => (decimal)p.TotalPrice);
+            return 0;
         }
-        public ActionResult CartPatial()
+        public PartialViewResult CartPatial()
         {
-            //ViewBag.SumQuarity = SumQuarity();
-            return View();
+            ViewBag.SumQuarity = SumQuarity();
+            return PartialView();
         }
         public ActionResult ShowCart()
         {
             List<CartItemModel> itemCarts = Session["Cart"] as List<CartItemModel>;
-            if (itemCarts !=null)
+            if (itemCarts != null)
             {
                 return View(itemCarts);
 
             }
             return RedirectToAction("Notification", "Home", new { notify = "Cart IsEmpty" });
 
+        }
+        public ActionResult SaveOrder(Customer customer)
+        {
+            if (Session["Cart"] == null)
+            {
+                return RedirectToAction("ShowCart");
+            }
+            List<CartItemModel> itemCarts = GetCart();
+            Customer cus = responsibility.UpdateCustomer(customer);
+            Order order = responsibility.AddOrder(cus);
+
+            List<OrderDetail> OrderDetails = new List<OrderDetail>();
+            foreach (var item in itemCarts)
+            {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.OrderId = order.Id;
+                orderDetail.ProductId = item.Product.Id;
+                orderDetail.Quantity = item.Quarity;
+                orderDetail.UnitsPrice = item.Product.UnitsPrice;
+                OrderDetails.Add(orderDetail);
+            }
+            responsibility.AddOderDetail(OrderDetails);
+            Session["Cart"] = null;
+            return RedirectToAction("ShowCart");
         }
     }
 }

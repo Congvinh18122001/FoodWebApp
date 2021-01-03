@@ -1,0 +1,132 @@
+﻿@using Food.lib.Objects;
+@model Order
+@{
+    ViewBag.Title = "OrderApproval";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="Content">
+
+        <h2>Customer : @Model.Customer.Name</h2>
+        <h4>Address : @Model.Customer.Address</h4>
+        <h4>Phone : @Model.Customer.PhoneNumber</h4>
+        <h4>Phone : @Model.Customer.PostalCode</h4>
+        <h4>OrderDate : @Model.OrderDate</h4>
+        <hr />
+        <h2>Đơn hàng</h2>
+        @using (Html.BeginForm("UpdateOrder", "OrderApproval", FormMethod.Post, new { @class = "formDonHang" }))
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">Đơn hàng</label>
+                <div class="col-md-10">
+                    <input class="form-control" name="Id" value="@Model.Id" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Thanh toán</label>
+                <div class="col-md-10">
+                    <select name="HadSold" class="form-control">
+                        <option @(Model.HadSold == true ? "selected" : "") value="true">Đã thanh toán</option>
+                        <option @(Model.HadSold != true ? "selected" : "") value="false">Chưa thanh toán</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Trình giao hàng</label>
+                <div class="col-md-10">
+                    <select name="Shipped" class="form-control">
+                        <option @(Model.Shipped == true ? "selected" : "") value="true">Đã giao</option>
+                        <option @(Model.Shipped != true ? "selected" : "") value="false">Chưa giao</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Hiệu lực</label>
+                <div class="col-md-10">
+                    <select name="Cancelled" class="form-control">
+                        <option @(Model.Cancelled == false ? "selected" : "") value="false">Chưa hủy</option>
+                        <option @(Model.Cancelled == true ? "selected" : "") value="true">Đã hủy</option>
+                    </select>
+                </div>
+            </div>
+        }
+        <hr />
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Imaage</th>
+                    <th>Price</th>
+                    <th>Quarity</th>
+                    <th>Total : </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int TongSoSP = 0;
+                    var tongTien = 0;
+                    decimal ThanhTien;
+                }
+                @foreach (var item in Model.OrderDetails)
+                {
+
+                    TongSoSP += item.Quantity;
+                    ThanhTien = (item.Product.UnitsPrice * item.Quantity);
+                    tongTien += (int)ThanhTien;
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            <img width="80px" height="80px" src="@item.Product.Image" />
+                        </td>
+                        <td>
+                            @String.Format("{0:#,##}", item.Product.UnitsPrice) VND
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>@String.Format("{0:#,##}", item.Product.UnitsPrice * item.Quantity) VND</td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        Tống số lượng : @TongSoSP sản phẩm
+                    </td>
+                    <td> Tổng tiền :  @String.Format("{0:#,##}", tongTien) VND</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<span class="btn btn-primary " id="btnInDonHang">In đơn hàng</span>
+<span class="btn btn-primary" id="btnLuuDon">Lưu đơn hàng</span>
+
+
+
+<script>
+    $("#btnLuuDon").click(function () {
+        $(".formDonHang").submit();
+    });
+    $("#btnInDonHang").click(function () {
+        var Content = $(".Content").html();
+        PrintPanel(Content);
+    });
+    function PrintPanel(Content) {
+        var printWindow = window.open('', '', 'height=400,width=800');
+        printWindow.document.write('<html><head><title>DIV Contents</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(Content);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+        return false;
+    }
+
+</script>
+

@@ -6,9 +6,9 @@
             <li><a href="#">About</a></li>
             <li><a href="@Url.Action("Index","Service")">Service</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="@Url.Action("ShowCart","Cart")">Cart</a></li>
+            @*<li><a href="@Url.Action("ShowCart","Cart")">Cart</a></li>*@
 
-            @*@Html.Action("CartPatial","Cart")*@
+            @Html.Action("CartPatial","Cart")
         </ul>
     </div>
     <div class="search">
